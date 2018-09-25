@@ -1,11 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <div class="col-md-offset-1 col-md-10">
-      <a href="{{ route('home') }}" id="logo">道道 道</a>
+      <a href="{{ route('home') }}" id="logo">卜芥</a>
       <nav>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{{ route('help') }}">帮助</a></li>
-          <li><a href="#">登录</a></li>
+          <li><a href="{{ route('signup') }}">登录</a></li>
         </ul>
       </nav>
     </div>
