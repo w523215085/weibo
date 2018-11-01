@@ -7,12 +7,18 @@ use App\Http\Requests;
 use Auth;
 
 class SessionsController extends Controller
-{
+{   
+    /*
+    *显示登录界面
+    *
+    */
     public function create()
     {
     	return view('sessions.create');
     }
 
+
+    //登录成功后跳转到个人界面
     public function store(Request $request)
     {
     	$credentials = $this->validate($request, [
