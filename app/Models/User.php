@@ -24,9 +24,17 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        //监听模型创建事件，在写入数据库之前触发
+        static::creating(function($user){
+            $user->activation_token = str_random(30);
+        });
+    }
 
     public function gravatar($size = '100')
     {
