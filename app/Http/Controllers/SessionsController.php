@@ -8,6 +8,14 @@ use Auth;
 
 class SessionsController extends Controller
 {   
+
+    public function __construct()
+    {
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+    
     /*
     *显示登录界面
     *
@@ -26,9 +34,12 @@ class SessionsController extends Controller
     		'password' => 'required'
     	]);
 
+        /*
+        Auth::attempt() 方法可接收两个参数，第一个参数为需要进行用户身份认证的数组，第二个参数为是否为用户开启『记住我』功能的布尔值。接下来让我们修改会话控制器中的 store 方法，为 Auth::attempt() 添加『记住我』参数。
+        */
     	if (Auth::attempt($credentials, $request->has('remember'))) {
     		session()->flash('success', '欢迎光临');
-    		return redirect()->route('users.show', [Auth::user()]);
+    		return redirect()->intended(route('users.show', [Auth::user()]));
     	}else{
     		session()->flash('danger', '很抱歉，邮箱和密码不匹配');
     		return redirect()->back();
