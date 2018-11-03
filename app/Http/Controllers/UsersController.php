@@ -114,7 +114,7 @@ class UsersController extends Controller
 
         $view = 'emails.confirm';
         $data = compact('user');
-        $from = 'aufree@yousails.com';                      //发送者
+        // $from = 'aufree@yousails.com';                      //发送者
         $name = 'Aufree';                                   //发送者名称
         $to = $user->email;                                 //接受者
         $subject = "感谢注册 Sample 应用！请确认你的邮箱。";   //主题
@@ -122,9 +122,8 @@ class UsersController extends Controller
         // 第一个参数是包含邮件消息的视图名称。
         // 第二个参数是要传递给该视图的数据数组。
         // 最后是一个用来接收邮件消息实例的闭包回调，我们可以在该回调中自定义邮件消息的发送者、接收者、邮件主题等信息。
-        Mail::send($view, $data, function($message) use ($from, $name, $to, $subject)
-        {
-            $message->from($from, $name)->to($to)->subject($subject);
+        Mail::send($view, $data, function ($message) use ($to, $subject) {
+            $message->to($to)->subject($subject);
         });
     }
 }
